@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  @apply bg-canvas text-ink font-sans antialiased;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(110, 155, 255, 0.09) 1px, transparent 0);
+  background-size: 28px 28px;
+}
+
+::selection {
+  background: #6e9bff;
+  color: #0b0e14;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0e14;
+}
+::-webkit-scrollbar-thumb {
+  background: #232838;
+  border-radius: 999px;
+  border: 2px solid #0b0e14;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2f3650;
+}
+
+:focus-visible {
+  outline: 2px solid #6e9bff;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.custom-cursor-active,
+.custom-cursor-active * {
+  cursor: none !important;
+}
+
+.container-px {
+  @apply px-6 sm:px-10 lg:px-16;
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #6e9bff, #6ee7b7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
