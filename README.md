@@ -50,20 +50,3 @@ src/
   `prefers-reduced-motion`
 - Meta tags básicas de SEO/Open Graph em `index.html`
 
-## Deploy
-
-Funciona em qualquer host de sites estáticos. Sugestões rápidas:
-
-- **Vercel**: `npm i -g vercel` → `vercel` na raiz do projeto
-- **Netlify**: arraste a pasta gerada por `npm run build` (`dist/`) no
-  painel do Netlify, ou conecte o repositório do GitHub
-- **GitHub Pages**: gere o build e publique o conteúdo de `dist/` na
-  branch `gh-pages`
-
-## Próximos passos sugeridos
-
-- Trocar as imagens placeholder pelos prints reais dos seus projetos
-- Ajustar as cores em `tailwind.config.js` se quiser uma paleta diferente
-- Adicionar Google Analytics / Plausible se quiser métricas de visitas
-- Criar uma página "Sobre" separada, se quiser mais conteúdo além da
-  landing page
