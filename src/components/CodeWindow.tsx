@@ -28,7 +28,7 @@ export default function CodeWindow({
           {avatarSrc ? (
             <img
               src={avatarSrc}
-              alt=""
+              alt="Foto de perfil"
               className="w-16 h-16 rounded-full object-cover ring-2 ring-accent-blue/70"
             />
           ) : (
