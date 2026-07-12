@@ -19,41 +19,6 @@ npm install
 npm run dev
 ```
 
-Acesse `http://localhost:5173`.
-
-Para gerar a versão de produção:
-
-```bash
-npm run build
-npm run preview
-```
-
-## O que você PRECISA editar antes de publicar
-
-### 1. Seus dados pessoais — `src/config/site.ts`
-
-Único arquivo obrigatório. Contém nome, cargo, usuário do GitHub, número do
-WhatsApp (formato internacional, só números — ex: `5573999999999`), e-mail,
-Instagram e (opcional) LinkedIn.
-
-### 2. Seus projetos — `src/data/projects.ts`
-
-Cada projeto tem: título, descrições (curta e longa), tecnologias, imagens,
-link do GitHub, link do deploy (opcional) e ano. As imagens de demonstração
-são geradas automaticamente (placeholders em SVG) só para o layout não ficar
-vazio — troque o array `images` de cada projeto pelos seus prints reais:
-
-```ts
-images: ['/projects/meu-projeto-1.png', '/projects/meu-projeto-2.png'],
-```
-
-Coloque os arquivos de imagem em `public/projects/`.
-
-### 3. Sua stack técnica — `src/data/techstack.ts`
-
-Adicione, remova ou troque os ícones. A lista completa de ícones de
-tecnologias disponíveis está em: https://react-icons.github.io/react-icons/icons/si
-
 ## Estrutura
 
 ```
