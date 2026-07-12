@@ -50,6 +50,12 @@ src/
   `prefers-reduced-motion`
 - Meta tags básicas de SEO/Open Graph em `index.html`
 
+## Sincronização com o GitHub
+
+Este projeto está conectado a `github.com/Walace-Costa/portfolio`. Alterações
+feitas pelo Claude Code são automaticamente commitadas e enviadas (`push`)
+para o branch `master`.
+
 ## Deploy
 
 Funciona em qualquer host de sites estáticos. Sugestões rápidas:
