@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://devwalace.com.br/sitemap.xml
