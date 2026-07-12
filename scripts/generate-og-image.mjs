@@ -56,7 +56,7 @@ const svg = `
     preserveAspectRatio="xMidYMid slice"
   />
 
-  <rect x="80" y="240" width="290" height="42" rx="21" fill="#0d2b22" stroke="#6ee7b7" stroke-opacity="0.4" stroke-width="1.5" />
+  <rect x="80" y="240" width="400" height="42" rx="21" fill="#0d2b22" stroke="#6ee7b7" stroke-opacity="0.4" stroke-width="1.5" />
   <circle cx="106" cy="261" r="5" fill="#6ee7b7" />
   <text x="122" y="267" font-family="JetBrains Mono, monospace" font-size="16" fill="#6ee7b7">disponível para novos projetos</text>
 
