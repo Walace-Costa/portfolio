@@ -77,18 +77,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
             <div className="p-5 sm:p-7">
               {/* galeria */}
-              <div
-                className="relative rounded-lg overflow-hidden border border-line bg-canvas touch-pan-y"
-                onDragEnd={(_, info) => {
-                  if (project.images.length < 2) return
-                  const SWIPE_THRESHOLD = 40
-                  if (info.offset.x <= -SWIPE_THRESHOLD) {
-                    setImageIndex((i) => (i + 1) % project.images.length)
-                  } else if (info.offset.x >= SWIPE_THRESHOLD) {
-                    setImageIndex((i) => (i - 1 + project.images.length) % project.images.length)
-                  }
-                }}
-              >
+              <div className="relative rounded-lg overflow-hidden border border-line bg-canvas touch-pan-y">
                 <motion.img
                   key={imageIndex}
                   src={project.images[imageIndex]}
@@ -97,6 +86,16 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   drag={project.images.length > 1 ? 'x' : false}
                   dragConstraints={{ left: 0, right: 0 }}
                   dragElastic={0.6}
+                  onDragEnd={(_, info) => {
+                    const SWIPE_THRESHOLD = 40
+                    if (info.offset.x <= -SWIPE_THRESHOLD) {
+                      setImageIndex((i) => (i + 1) % project.images.length)
+                    } else if (info.offset.x >= SWIPE_THRESHOLD) {
+                      setImageIndex(
+                        (i) => (i - 1 + project.images.length) % project.images.length
+                      )
+                    }
+                  }}
                 />
                 {project.images.length > 1 && (
                   <>
