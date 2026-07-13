@@ -79,7 +79,6 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               {/* galeria */}
               <div className="relative rounded-lg overflow-hidden border border-line bg-canvas touch-pan-y">
                 <motion.img
-                  key={imageIndex}
                   src={project.images[imageIndex]}
                   alt={`${project.title} — imagem ${imageIndex + 1}`}
                   className="w-full aspect-[16/10] object-cover"
