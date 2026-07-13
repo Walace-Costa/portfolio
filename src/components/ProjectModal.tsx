@@ -77,11 +77,26 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
             <div className="p-5 sm:p-7">
               {/* galeria */}
-              <div className="relative rounded-lg overflow-hidden border border-line bg-canvas">
-                <img
+              <div
+                className="relative rounded-lg overflow-hidden border border-line bg-canvas touch-pan-y"
+                onDragEnd={(_, info) => {
+                  if (project.images.length < 2) return
+                  const SWIPE_THRESHOLD = 40
+                  if (info.offset.x <= -SWIPE_THRESHOLD) {
+                    setImageIndex((i) => (i + 1) % project.images.length)
+                  } else if (info.offset.x >= SWIPE_THRESHOLD) {
+                    setImageIndex((i) => (i - 1 + project.images.length) % project.images.length)
+                  }
+                }}
+              >
+                <motion.img
+                  key={imageIndex}
                   src={project.images[imageIndex]}
                   alt={`${project.title} — imagem ${imageIndex + 1}`}
                   className="w-full aspect-[16/10] object-cover"
+                  drag={project.images.length > 1 ? 'x' : false}
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.6}
                 />
                 {project.images.length > 1 && (
                   <>
@@ -92,16 +107,16 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                         )
                       }
                       aria-label="Imagem anterior"
-                      className="absolute left-2 top-1/2 -translate-y-1/2 bg-canvas/70 border border-line rounded-full p-2 text-ink hover:text-accent-blue transition-colors"
+                      className="absolute left-1.5 top-1/2 -translate-y-1/2 bg-canvas/70 border border-line rounded-full p-3 sm:p-2 text-ink hover:text-accent-blue transition-colors"
                     >
-                      <HiChevronLeft size={18} />
+                      <HiChevronLeft size={20} />
                     </button>
                     <button
                       onClick={() => setImageIndex((i) => (i + 1) % project.images.length)}
                       aria-label="Próxima imagem"
-                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-canvas/70 border border-line rounded-full p-2 text-ink hover:text-accent-blue transition-colors"
+                      className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-canvas/70 border border-line rounded-full p-3 sm:p-2 text-ink hover:text-accent-blue transition-colors"
                     >
-                      <HiChevronRight size={18} />
+                      <HiChevronRight size={20} />
                     </button>
                     <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
                       {project.images.map((_, i) => (
