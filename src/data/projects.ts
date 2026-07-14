@@ -11,16 +11,16 @@ import { placeholder } from './placeholder'
  */
 export const projects: Project[] = [
   {
-    id: 'my-tree',
-    title: 'My Tree',
+    id: 'mac-chandeliers',
+    title: 'Mac Chandeliers',
     shortDescription:
-      'Aplicação web para gerenciar e compartilhar seus links de redes sociais de forma centralizada.',
+      'Site institucional para uma marca de lustres de vidro soprado artesanal, com catálogo e animações de entrada.',
     description:
-      'Uma aplicação web para gerenciar e compartilhar seus links de redes sociais de forma centralizada. Construída com React, TypeScript e Vite, com autenticação e persistência de dados através do Firebase.',
-    technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Firebase', 'React Router'],
-    images: ['/tree1.png', '/tree2.png', '/tree3.png'],
-    githubUrl: 'https://github.com/Walace-Costa/MyTree',
-    liveUrl: 'https://mytree-eight.vercel.app',
+      'Site institucional para a "Mac Chandeliers", marca especializada em lustres e luminárias de vidro soprado artesanal. Apresenta a identidade da marca, catálogo de peças e reveals de rolagem para destacar o trabalho artesanal em vidro.',
+    technologies: ['React', 'TypeScript', 'Vite', 'Framer Motion', 'Lucide'],
+    images: [placeholder('Mac Chandeliers', 2), placeholder('Mac Chandeliers', 0), placeholder('Mac Chandeliers', 1)],
+    githubUrl: 'https://github.com/Walace-Costa/Mac-Chandeliers',
+    liveUrl: 'https://mac-chandeliers.vercel.app',
     featured: false,
     year: '2026',
   },
