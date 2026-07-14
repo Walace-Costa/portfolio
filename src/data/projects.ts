@@ -68,16 +68,18 @@ export const projects: Project[] = [
   },
   // ---- projetos de exemplo: troque pelos seus quando tiver mais repositórios reais ----
   {
-    id: 'taskflow',
-    title: 'TaskFlow',
+    id: 'my-tree',
+    title: 'My Tree',
     shortDescription:
-      'Quadro Kanban colaborativo com drag-and-drop, prazos e notificações em tempo real.',
+      'Aplicação web para gerenciar e compartilhar seus links de redes sociais de forma centralizada.',
     description:
-      'Aplicação de gestão de tarefas em formato Kanban, com colunas personalizáveis, arrastar e soltar entre etapas, atribuição de responsáveis e prazos. Sincronização em tempo real entre membros da equipe através de websockets.',
-    technologies: ['React', 'TypeScript', 'Zustand', 'Tailwind CSS', 'Node.js', 'WebSocket'],
-    images: [placeholder('TaskFlow', 0), placeholder('TaskFlow', 1), placeholder('TaskFlow', 2)],
+      'Uma aplicação web para gerenciar e compartilhar seus links de redes sociais de forma centralizada. Construída com React, TypeScript e Vite, com autenticação e persistência de dados através do Firebase.',
+    technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Firebase', 'React Router'],
+    images: ['/tree1.png', '/tree2.png', '/tree3.png'],
+    githubUrl: 'https://github.com/Walace-Costa/MyTree',
+    liveUrl: 'https://mytree-eight.vercel.app',
     featured: false,
-    year: '2025',
+    year: '2026',
   },
   {
     id: 'studio-fit',
