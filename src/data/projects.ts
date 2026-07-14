@@ -18,7 +18,7 @@ export const projects: Project[] = [
     description:
       'Site institucional para a "Mac Chandeliers", marca especializada em lustres e luminárias de vidro soprado artesanal. Apresenta a identidade da marca, catálogo de peças e reveals de rolagem para destacar o trabalho artesanal em vidro.',
     technologies: ['React', 'TypeScript', 'Vite', 'Framer Motion', 'Lucide'],
-    images: [placeholder('Mac Chandeliers', 2), placeholder('Mac Chandeliers', 0), placeholder('Mac Chandeliers', 1)],
+    images: ['/mac1.png', '/mac2.png', '/mac3.png'],
     githubUrl: 'https://github.com/Walace-Costa/Mac-Chandeliers',
     liveUrl: 'https://mac-chandeliers.vercel.app',
     featured: false,
