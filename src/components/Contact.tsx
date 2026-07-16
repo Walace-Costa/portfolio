@@ -49,10 +49,17 @@ export default function Contact() {
     setTimeout(() => setSent(false), 4000)
   }
 
-  const inputClasses = (hasError: boolean) =>
-    `w-full bg-panel2 border rounded-md px-4 py-3 font-mono text-sm text-ink placeholder:text-faint outline-none transition-colors ${
-      hasError ? 'border-accent-rose/60' : 'border-line focus:border-accent-blue/60'
+  const fieldClasses = (hasError: boolean) =>
+    `peer w-full bg-panel2 border rounded-md px-4 pt-6 pb-2 font-mono text-sm text-ink outline-none transition-all duration-200 ${
+      hasError
+        ? 'border-accent-rose/60'
+        : 'border-line focus:border-accent-blue/60 focus:shadow-[0_0_0_3px_rgba(110,155,255,0.12)]'
     }`
+
+  const labelClasses =
+    'absolute left-4 top-4 font-mono text-sm text-faint transition-all duration-200 pointer-events-none ' +
+    'peer-focus:top-2 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-wider peer-focus:text-accent-blue ' +
+    'peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-wider peer-[:not(:placeholder-shown)]:text-muted'
 
   return (
     <section id="contact" className="py-24 sm:py-32">
@@ -60,7 +67,7 @@ export default function Contact() {
         <div>
           <SectionHeading comment="// contact.ts" title="Vamos conversar?" />
           <p className="mt-6 text-muted leading-relaxed max-w-md">
-            Preencha o formulário ao lado, sua mensagem é enviada direto para
+            Preencha o formulário ao lado — sua mensagem é enviada direto para
             o meu WhatsApp, sem intermediários. Ou, se preferir, use um dos
             canais abaixo.
           </p>
@@ -86,52 +93,52 @@ export default function Contact() {
         >
           <CodeWindow filename="mensagem.tsx" language="form">
             <form onSubmit={handleSubmit} noValidate className="space-y-4">
-              <div>
-                <label htmlFor="name" className="font-mono text-xs text-muted block mb-1.5">
-                  nome
-                </label>
+              <div className="relative">
                 <input
                   id="name"
                   type="text"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  placeholder="Digite seu nome"
-                  className={inputClasses(!!errors.name)}
+                  placeholder=" "
+                  className={fieldClasses(!!errors.name)}
                 />
+                <label htmlFor="name" className={labelClasses}>
+                  nome
+                </label>
                 {errors.name && (
                   <p className="text-accent-rose text-xs font-mono mt-1">{errors.name}</p>
                 )}
               </div>
 
-              <div>
-                <label htmlFor="email" className="font-mono text-xs text-muted block mb-1.5">
-                  e-mail <span className="text-faint">(opcional)</span>
-                </label>
+              <div className="relative">
                 <input
                   id="email"
                   type="email"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  placeholder="voce@email.com"
-                  className={inputClasses(!!errors.email)}
+                  placeholder=" "
+                  className={fieldClasses(!!errors.email)}
                 />
+                <label htmlFor="email" className={labelClasses}>
+                  e-mail (opcional)
+                </label>
                 {errors.email && (
                   <p className="text-accent-rose text-xs font-mono mt-1">{errors.email}</p>
                 )}
               </div>
 
-              <div>
-                <label htmlFor="message" className="font-mono text-xs text-muted block mb-1.5">
-                  mensagem
-                </label>
+              <div className="relative">
                 <textarea
                   id="message"
                   rows={4}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  placeholder="Me conta um pouco sobre o projeto..."
-                  className={`${inputClasses(!!errors.message)} resize-none`}
+                  placeholder=" "
+                  className={`${fieldClasses(!!errors.message)} resize-none`}
                 />
+                <label htmlFor="message" className={labelClasses}>
+                  mensagem
+                </label>
                 {errors.message && (
                   <p className="text-accent-rose text-xs font-mono mt-1">{errors.message}</p>
                 )}

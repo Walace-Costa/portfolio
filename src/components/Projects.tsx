@@ -4,6 +4,7 @@ import { HiOutlinePhotograph } from 'react-icons/hi'
 import SectionHeading from './SectionHeading'
 import ProjectModal from './ProjectModal'
 import { projects } from '@/data/projects'
+import { techLookup } from '@/data/techLookup'
 import { site } from '@/config/site'
 import type { Project } from '@/types'
 
@@ -35,8 +36,10 @@ export default function Projects() {
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.45, delay: (i % 3) * 0.08, ease: 'easeOut' }}
               whileHover={{ y: -6 }}
-              className="group text-left rounded-xl border border-line bg-panel/60 overflow-hidden hover:border-accent-blue/40 transition-colors flex flex-col"
+              className="group relative text-left rounded-xl border border-line bg-panel/60 overflow-hidden transition-all duration-300 flex flex-col hover:border-accent-blue/40 hover:shadow-[0_12px_36px_-8px_rgba(110,155,255,0.18)]"
             >
+              <span className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-accent-blue to-accent-mint scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 z-10" />
+
               <div className="relative aspect-[16/10] overflow-hidden border-b border-line bg-canvas">
                 <img
                   src={project.images[0]}
@@ -59,7 +62,9 @@ export default function Projects() {
 
               <div className="p-5 flex flex-col gap-3 flex-1">
                 <div className="flex items-start justify-between gap-2">
-                  <h3 className="font-mono font-semibold text-ink">{project.title}</h3>
+                  <h3 className="font-mono font-semibold text-ink group-hover:text-accent-blue transition-colors">
+                    {project.title}
+                  </h3>
                   <span className="font-mono text-[11px] text-faint shrink-0 mt-0.5">
                     {project.year}
                   </span>
@@ -68,16 +73,22 @@ export default function Projects() {
                   {project.shortDescription}
                 </p>
                 <div className="mt-auto flex flex-wrap gap-1.5 pt-1">
-                  {project.technologies.slice(0, 3).map((tech) => (
-                    <span
-                      key={tech}
-                      className="font-mono text-[11px] px-2 py-0.5 rounded bg-panel2 border border-line text-accent-mint/80"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                  {project.technologies.slice(0, 3).map((tech) => {
+                    const info = techLookup[tech]
+                    const Icon = info?.icon
+                    return (
+                      <span
+                        key={tech}
+                        className="inline-flex items-center gap-1.5 font-mono text-[11px] px-2 py-1 rounded-md bg-panel2 border border-line"
+                        style={{ color: info?.color ?? '#6ee7b7' }}
+                      >
+                        {Icon && <Icon size={12} />}
+                        <span className="text-ink/70">{tech}</span>
+                      </span>
+                    )
+                  })}
                   {project.technologies.length > 3 && (
-                    <span className="font-mono text-[11px] px-2 py-0.5 text-faint">
+                    <span className="font-mono text-[11px] px-2 py-1 text-faint">
                       +{project.technologies.length - 3}
                     </span>
                   )}
