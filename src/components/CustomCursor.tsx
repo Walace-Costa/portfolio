@@ -88,9 +88,9 @@ export default function CustomCursor() {
         const alpha = t * 0.45
 
         const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, radius * 4)
-        gradient.addColorStop(0, `rgba(${blue}, ${alpha})`)
-        gradient.addColorStop(0.55, `rgba(${mint}, ${alpha * 0.35})`)
-        gradient.addColorStop(1, `rgba(${blue}, 0)`)
+        gradient.addColorStop(0, `rgb(${blue} / ${alpha})`)
+        gradient.addColorStop(0.55, `rgb(${mint} / ${alpha * 0.35})`)
+        gradient.addColorStop(1, `rgb(${blue} / 0)`)
 
         ctx.fillStyle = gradient
         ctx.beginPath()

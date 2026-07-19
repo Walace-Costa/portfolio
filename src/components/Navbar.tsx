@@ -44,14 +44,17 @@ export default function Navbar({ activeSection }: NavbarProps) {
       }`}
     >
       <nav className="container-px flex items-center justify-between h-16 max-w-6xl mx-auto">
-        <button
-          onClick={() => handleNavClick('home')}
-          className="font-mono font-bold text-ink text-sm sm:text-base"
-        >
-          <span className="text-accent-blue">&lt;</span>
-          DevWalace
-          <span className="text-accent-mint">/&gt;</span>
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => handleNavClick('home')}
+            className="font-mono font-bold text-ink text-sm sm:text-base"
+          >
+            <span className="text-accent-blue">&lt;</span>
+            DevWalace
+            <span className="text-accent-mint">/&gt;</span>
+          </button>
+          <ThemeToggle className="md:hidden" />
+        </div>
 
         <ul className="hidden md:flex items-center gap-1 font-mono text-sm">
           {NAV_ITEMS.map((item) => (
@@ -134,28 +137,25 @@ export default function Navbar({ activeSection }: NavbarProps) {
                 </li>
               ))}
             </ul>
-            <div className="flex items-center justify-between px-6 pb-5">
-              <div className="flex items-center gap-5">
-                <a
-                  href={whatsappHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="WhatsApp"
-                  className="text-muted hover:text-accent-mint transition-colors"
-                >
-                  <FaWhatsapp size={20} />
-                </a>
-                <a
-                  href={instagramHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Instagram"
-                  className="text-muted hover:text-accent-rose transition-colors"
-                >
-                  <FaInstagram size={20} />
-                </a>
-              </div>
-              <ThemeToggle size={20} />
+            <div className="flex items-center gap-5 px-6 pb-5">
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="text-muted hover:text-accent-mint transition-colors"
+              >
+                <FaWhatsapp size={20} />
+              </a>
+              <a
+                href={instagramHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="text-muted hover:text-accent-rose transition-colors"
+              >
+                <FaInstagram size={20} />
+              </a>
             </div>
           </motion.div>
         )}
