@@ -4,18 +4,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        canvas: '#0b0e14',
-        panel: '#12151d',
-        panel2: '#161a24',
-        line: '#232838',
-        ink: '#e6e8ee',
-        muted: '#838ca0',
-        faint: '#4c5468',
+        canvas: 'rgb(var(--color-canvas) / <alpha-value>)',
+        panel: 'rgb(var(--color-panel) / <alpha-value>)',
+        panel2: 'rgb(var(--color-panel2) / <alpha-value>)',
+        line: 'rgb(var(--color-line) / <alpha-value>)',
+        ink: 'rgb(var(--color-ink) / <alpha-value>)',
+        muted: 'rgb(var(--color-muted) / <alpha-value>)',
+        faint: 'rgb(var(--color-faint) / <alpha-value>)',
         accent: {
-          blue: '#6e9bff',
-          mint: '#6ee7b7',
-          amber: '#f5b85c',
-          rose: '#f28fad',
+          blue: 'rgb(var(--color-accent-blue) / <alpha-value>)',
+          mint: 'rgb(var(--color-accent-mint) / <alpha-value>)',
+          amber: 'rgb(var(--color-accent-amber) / <alpha-value>)',
+          rose: 'rgb(var(--color-accent-rose) / <alpha-value>)',
         },
       },
       fontFamily: {

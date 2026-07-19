@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useTheme } from '@/context/ThemeContext'
 
 interface TrailPoint {
   x: number
@@ -13,13 +14,25 @@ const MAX_POINTS = 20
  * Cursor customizado: núcleo brilhante + rastro em degradê azul→mint
  * mostrando a trajetória recente do mouse. Só ativa em dispositivos
  * com ponteiro fino (desktop) e respeita prefers-reduced-motion.
+ * As cores são lidas das CSS variables do tema atual (dark/light).
  */
 export default function CustomCursor() {
+  const { theme } = useTheme()
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const pointsRef = useRef<TrailPoint[]>([])
   const mouseRef = useRef({ x: -100, y: -100 })
   const hoverRef = useRef(false)
   const rafRef = useRef(0)
+  const colorsRef = useRef({ blue: '110 155 255', mint: '110 231 183', core: '230 232 238' })
+
+  useEffect(() => {
+    const styles = getComputedStyle(document.documentElement)
+    colorsRef.current = {
+      blue: styles.getPropertyValue('--color-accent-blue').trim(),
+      mint: styles.getPropertyValue('--color-accent-mint').trim(),
+      core: styles.getPropertyValue('--color-ink').trim(),
+    }
+  }, [theme])
 
   useEffect(() => {
     const isFinePointer = window.matchMedia('(pointer: fine)').matches
@@ -58,6 +71,7 @@ export default function CustomCursor() {
     const draw = () => {
       const { x, y } = mouseRef.current
       const points = pointsRef.current
+      const { blue, mint, core } = colorsRef.current
 
       points.push({ x, y, age: 0 })
       for (const p of points) p.age++
@@ -74,9 +88,9 @@ export default function CustomCursor() {
         const alpha = t * 0.45
 
         const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, radius * 4)
-        gradient.addColorStop(0, `rgba(110, 155, 255, ${alpha})`)
-        gradient.addColorStop(0.55, `rgba(110, 231, 183, ${alpha * 0.35})`)
-        gradient.addColorStop(1, 'rgba(110, 155, 255, 0)')
+        gradient.addColorStop(0, `rgba(${blue}, ${alpha})`)
+        gradient.addColorStop(0.55, `rgba(${mint}, ${alpha * 0.35})`)
+        gradient.addColorStop(1, `rgba(${blue}, 0)`)
 
         ctx.fillStyle = gradient
         ctx.beginPath()
@@ -89,8 +103,8 @@ export default function CustomCursor() {
         const coreRadius = hoverRef.current ? 6 : 3
         ctx.beginPath()
         ctx.arc(last.x, last.y, coreRadius, 0, Math.PI * 2)
-        ctx.fillStyle = hoverRef.current ? '#6ee7b7' : '#e6e8ee'
-        ctx.shadowColor = '#6e9bff'
+        ctx.fillStyle = hoverRef.current ? `rgb(${mint})` : `rgb(${core})`
+        ctx.shadowColor = `rgb(${blue})`
         ctx.shadowBlur = hoverRef.current ? 22 : 12
         ctx.fill()
         ctx.shadowBlur = 0

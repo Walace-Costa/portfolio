@@ -8,6 +8,7 @@ import Projects from '@/components/Projects'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import StatusBar from '@/components/StatusBar'
+import WhatsAppFloat from '@/components/WhatsAppFloat'
 import { useActiveSection } from '@/hooks/useActiveSection'
 
 const SECTION_IDS = ['home', 'stack', 'projects', 'contact']
@@ -31,6 +32,7 @@ export default function App() {
 
       <Footer />
       <StatusBar />
+      <WhatsAppFloat />
     </>
   )
 }

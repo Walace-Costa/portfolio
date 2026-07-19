@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { HiMenu, HiX } from 'react-icons/hi'
 import { FaWhatsapp, FaInstagram } from 'react-icons/fa'
 import { site } from '@/config/site'
+import ThemeToggle from './ThemeToggle'
 
 const NAV_ITEMS = [
   { id: 'home', label: 'home' },
@@ -96,6 +97,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
           >
             disponível.chat()
           </button>
+          <ThemeToggle className="ml-1 pl-3 border-l border-line" />
         </div>
 
         <button
@@ -132,25 +134,28 @@ export default function Navbar({ activeSection }: NavbarProps) {
                 </li>
               ))}
             </ul>
-            <div className="flex items-center gap-5 px-6 pb-5">
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp"
-                className="text-muted hover:text-accent-mint transition-colors"
-              >
-                <FaWhatsapp size={20} />
-              </a>
-              <a
-                href={instagramHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="text-muted hover:text-accent-rose transition-colors"
-              >
-                <FaInstagram size={20} />
-              </a>
+            <div className="flex items-center justify-between px-6 pb-5">
+              <div className="flex items-center gap-5">
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="WhatsApp"
+                  className="text-muted hover:text-accent-mint transition-colors"
+                >
+                  <FaWhatsapp size={20} />
+                </a>
+                <a
+                  href={instagramHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="text-muted hover:text-accent-rose transition-colors"
+                >
+                  <FaInstagram size={20} />
+                </a>
+              </div>
+              <ThemeToggle size={20} />
             </div>
           </motion.div>
         )}
