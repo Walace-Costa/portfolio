@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
+import { useTheme } from '@/context/ThemeContext'
 
 interface Glyph {
   symbol: string
@@ -27,29 +28,43 @@ const GLYPHS: Glyph[] = [
  * bem sutis. Reforça o tema "editor de código" sem competir com o
  * conteúdo principal. Respeita prefers-reduced-motion.
  */
+// No tema claro, cores escuras em baixa opacidade sobre fundo branco ficam
+// quase invisíveis (o mesmo % de opacidade "lê" muito mais fraco do que uma
+// cor clara sobre fundo escuro) — por isso a opacidade é reforçada ali.
+const LIGHT_OPACITY_BOOST = 2.4
+const LIGHT_OPACITY_MAX = 0.35
+
 export default function FloatingGlyphs() {
   const shouldReduceMotion = useReducedMotion()
+  const { theme } = useTheme()
   if (shouldReduceMotion) return null
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-      {GLYPHS.map((g, i) => (
-        <motion.span
-          key={i}
-          className={`absolute bottom-[-40px] font-mono font-bold select-none ${g.color}`}
-          style={{ left: g.left, fontSize: g.size }}
-          animate={{ y: ['0vh', '-120vh'], opacity: [0, g.opacity, g.opacity, 0] }}
-          transition={{
-            duration: g.duration,
-            delay: g.delay,
-            repeat: Infinity,
-            ease: 'linear',
-            times: [0, 0.08, 0.85, 1],
-          }}
-        >
-          {g.symbol}
-        </motion.span>
-      ))}
+      {GLYPHS.map((g, i) => {
+        const peakOpacity =
+          theme === 'light'
+            ? Math.min(g.opacity * LIGHT_OPACITY_BOOST, LIGHT_OPACITY_MAX)
+            : g.opacity
+
+        return (
+          <motion.span
+            key={i}
+            className={`absolute bottom-[-40px] font-mono font-bold select-none ${g.color}`}
+            style={{ left: g.left, fontSize: g.size }}
+            animate={{ y: ['0vh', '-120vh'], opacity: [0, peakOpacity, peakOpacity, 0] }}
+            transition={{
+              duration: g.duration,
+              delay: g.delay,
+              repeat: Infinity,
+              ease: 'linear',
+              times: [0, 0.08, 0.85, 1],
+            }}
+          >
+            {g.symbol}
+          </motion.span>
+        )
+      })}
     </div>
   )
 }

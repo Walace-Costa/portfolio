@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { HiMenu, HiX } from 'react-icons/hi'
 import { FaWhatsapp, FaInstagram } from 'react-icons/fa'
 import { site } from '@/config/site'
+import ThemeToggle from './ThemeToggle'
 
 const NAV_ITEMS = [
   { id: 'home', label: 'home' },
@@ -43,14 +44,17 @@ export default function Navbar({ activeSection }: NavbarProps) {
       }`}
     >
       <nav className="container-px flex items-center justify-between h-16 max-w-6xl mx-auto">
-        <button
-          onClick={() => handleNavClick('home')}
-          className="font-mono font-bold text-ink text-sm sm:text-base"
-        >
-          <span className="text-accent-blue">&lt;</span>
-          DevWalace
-          <span className="text-accent-mint">/&gt;</span>
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => handleNavClick('home')}
+            className="font-mono font-bold text-ink text-sm sm:text-base"
+          >
+            <span className="text-accent-blue">&lt;</span>
+            DevWalace
+            <span className="text-accent-mint">/&gt;</span>
+          </button>
+          <ThemeToggle className="md:hidden" />
+        </div>
 
         <ul className="hidden md:flex items-center gap-1 font-mono text-sm">
           {NAV_ITEMS.map((item) => (
@@ -96,6 +100,7 @@ export default function Navbar({ activeSection }: NavbarProps) {
           >
             disponível.chat()
           </button>
+          <ThemeToggle className="ml-1 pl-3 border-l border-line" />
         </div>
 
         <button

@@ -2,6 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-canvas: 11 14 20;
+  --color-panel: 18 21 29;
+  --color-panel2: 22 26 36;
+  --color-line: 35 40 56;
+  --color-ink: 230 232 238;
+  --color-muted: 131 140 160;
+  --color-faint: 76 84 104;
+  --color-accent-blue: 110 155 255;
+  --color-accent-mint: 110 231 183;
+  --color-accent-amber: 245 184 92;
+  --color-accent-rose: 242 143 173;
+}
+
+/* Tema claro — ativado adicionando a classe .light no <html> */
+.light {
+  --color-canvas: 247 248 250;
+  --color-panel: 255 255 255;
+  --color-panel2: 238 241 246;
+  --color-line: 221 227 238;
+  --color-ink: 15 20 32;
+  --color-muted: 91 100 120;
+  --color-faint: 148 160 184;
+  --color-accent-blue: 47 98 224;
+  --color-accent-mint: 22 150 105;
+  --color-accent-amber: 191 125 33;
+  --color-accent-rose: 214 74 116;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -21,34 +50,37 @@ html {
 }
 
 body {
-  @apply bg-canvas text-ink font-sans antialiased;
-  background-image:
-    radial-gradient(circle at 1px 1px, rgba(110, 155, 255, 0.09) 1px, transparent 0);
+  @apply bg-canvas text-ink font-sans antialiased transition-colors duration-300;
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgb(var(--color-accent-blue) / 0.09) 1px,
+    transparent 0
+  );
   background-size: 28px 28px;
 }
 
 ::selection {
-  background: #6e9bff;
-  color: #0b0e14;
+  background: rgb(var(--color-accent-blue));
+  color: rgb(var(--color-canvas));
 }
 
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b0e14;
+  background: rgb(var(--color-canvas));
 }
 ::-webkit-scrollbar-thumb {
-  background: #232838;
+  background: rgb(var(--color-line));
   border-radius: 999px;
-  border: 2px solid #0b0e14;
+  border: 2px solid rgb(var(--color-canvas));
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2f3650;
+  background: rgb(var(--color-faint));
 }
 
 :focus-visible {
-  outline: 2px solid #6e9bff;
+  outline: 2px solid rgb(var(--color-accent-blue));
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -63,7 +95,11 @@ body {
 }
 
 .text-gradient {
-  background: linear-gradient(90deg, #6e9bff, #6ee7b7);
+  background: linear-gradient(
+    90deg,
+    rgb(var(--color-accent-blue)),
+    rgb(var(--color-accent-mint))
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
