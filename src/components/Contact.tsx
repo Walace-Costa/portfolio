@@ -101,7 +101,7 @@ export default function Contact() {
         >
           <span className="inline-flex items-center gap-2 font-mono text-xs text-accent-mint border border-accent-mint/30 bg-accent-mint/5 rounded-full px-3 py-1 mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-accent-mint animate-pulse" />
-            canal direto — cai no meu WhatsApp
+canal direto: cai no meu WhatsApp
           </span>
 
           <CodeWindow filename="mensagem.tsx" language="form">
