@@ -64,11 +64,9 @@
         margin: 0;
         min-height: 100vh;
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 8px;
-        padding: 64px 24px 48px;
+        padding: 48px 24px;
         font-family: 'Inter', system-ui, sans-serif;
         color: rgb(var(--color-ink));
         background-color: rgb(var(--color-canvas));
@@ -88,23 +86,22 @@
         position: fixed;
         pointer-events: none;
         border-radius: 999px;
-        filter: blur(110px);
+        filter: blur(120px);
         z-index: 0;
       }
       .glow-blue {
-        top: -10%;
-        left: 50%;
-        width: 560px;
-        height: 560px;
-        transform: translateX(-50%);
-        background: rgb(var(--color-accent-blue) / 0.16);
+        top: -12%;
+        right: -8%;
+        width: 640px;
+        height: 640px;
+        background: rgb(var(--color-accent-blue) / 0.18);
         animation: drift-a 18s ease-in-out infinite;
       }
       .glow-rose {
-        bottom: -15%;
-        right: -5%;
-        width: 420px;
-        height: 420px;
+        bottom: -18%;
+        left: -10%;
+        width: 460px;
+        height: 460px;
         background: rgb(var(--color-accent-rose) / 0.1);
         animation: drift-b 22s ease-in-out infinite;
       }
@@ -112,10 +109,10 @@
       @keyframes drift-a {
         0%,
         100% {
-          transform: translate(-50%, 0);
+          transform: translate(0, 0);
         }
         50% {
-          transform: translate(calc(-50% + 30px), 20px);
+          transform: translate(-30px, 25px);
         }
       }
       @keyframes drift-b {
@@ -124,33 +121,68 @@
           transform: translate(0, 0);
         }
         50% {
-          transform: translate(-25px, -15px);
+          transform: translate(20px, -20px);
         }
       }
 
-      main {
+      .layout {
         position: relative;
         z-index: 1;
+        width: 100%;
+        max-width: 1120px;
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .text-col {
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
-        max-width: 560px;
+        order: 2;
+      }
+
+      .robot-col {
+        display: flex;
+        justify-content: center;
+        order: 1;
+      }
+
+      @media (min-width: 860px) {
+        .layout {
+          grid-template-columns: 1fr 1.15fr;
+          gap: 24px;
+        }
+        .text-col {
+          align-items: flex-start;
+          text-align: left;
+          order: 1;
+        }
+        .robot-col {
+          justify-content: center;
+          order: 2;
+        }
       }
 
       /* --- robô --- */
       .robot-wrap {
-        width: min(320px, 68vw);
-        margin-bottom: 8px;
-        animation: float 6s ease-in-out infinite;
+        width: min(460px, 78vw);
+        animation: float 6.5s ease-in-out infinite;
+        filter: drop-shadow(0 30px 34px rgb(var(--color-canvas) / 0.45));
+      }
+
+      @media (min-width: 860px) {
+        .robot-wrap {
+          width: min(560px, 42vw);
+        }
       }
 
       .robot-wrap img {
         display: block;
         width: 100%;
         height: auto;
-        -webkit-mask-image: radial-gradient(closest-side, black 40%, transparent 100%);
-        mask-image: radial-gradient(closest-side, black 40%, transparent 100%);
       }
 
       @keyframes float {
@@ -159,7 +191,7 @@
           transform: translateY(0px);
         }
         50% {
-          transform: translateY(-14px);
+          transform: translateY(-18px);
         }
       }
 
@@ -187,7 +219,7 @@
         background: rgb(var(--color-accent-rose) / 0.06);
         border-radius: 999px;
         padding: 5px 14px;
-        margin-bottom: 20px;
+        margin-bottom: 22px;
         animation-delay: 0.05s;
       }
       .badge .dot {
@@ -198,31 +230,13 @@
         animation: blink 1.4s step-start infinite;
       }
 
-      .code {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 13px;
-        line-height: 1.7;
-        color: rgb(var(--color-muted));
-        text-align: left;
-        border: 1px solid rgb(var(--color-line));
-        background: rgb(var(--color-panel));
-        border-radius: 10px;
-        padding: 16px 18px;
-        margin-bottom: 24px;
-        animation-delay: 0.15s;
-      }
-      .code .kw {
-        color: rgb(var(--color-accent-rose));
-      }
-      .code .fn {
-        color: rgb(var(--color-accent-blue));
-      }
-      .code .str {
-        color: rgb(var(--color-accent-mint));
-      }
-      .code .cursor {
-        color: rgb(var(--color-ink));
-        animation: blink 1s step-start infinite;
+      .rule {
+        width: 56px;
+        height: 3px;
+        border-radius: 2px;
+        margin-bottom: 20px;
+        background: linear-gradient(90deg, rgb(var(--color-accent-blue)), rgb(var(--color-accent-mint)));
+        animation-delay: 0.1s;
       }
 
       @keyframes blink {
@@ -239,23 +253,23 @@
       h1 {
         font-family: 'JetBrains Mono', monospace;
         font-weight: 800;
-        font-size: clamp(56px, 11vw, 88px);
+        font-size: clamp(64px, 12vw, 108px);
         line-height: 1;
-        margin: 0 0 14px;
+        margin: 0 0 16px;
         background: linear-gradient(90deg, rgb(var(--color-accent-blue)), rgb(var(--color-accent-mint)));
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
-        animation-delay: 0.25s;
+        animation-delay: 0.18s;
       }
 
       p.subtitle {
         margin: 0 0 32px;
         color: rgb(var(--color-muted));
-        font-size: 15px;
+        font-size: 16px;
         line-height: 1.7;
-        max-width: 420px;
-        animation-delay: 0.35s;
+        max-width: 400px;
+        animation-delay: 0.28s;
       }
 
       p.subtitle strong {
@@ -268,7 +282,13 @@
         gap: 12px;
         justify-content: center;
         flex-wrap: wrap;
-        animation-delay: 0.45s;
+        animation-delay: 0.38s;
+      }
+
+      @media (min-width: 860px) {
+        .actions {
+          justify-content: flex-start;
+        }
       }
 
       a.btn {
@@ -318,32 +338,33 @@
     <div class="glow glow-blue"></div>
     <div class="glow glow-rose"></div>
 
-    <main>
-      <div class="robot-wrap">
-        <img src="404-robot.png" alt="Robô fofo segurando um cabo desconectado, com expressão confusa" width="1536" height="1024" />
+    <div class="layout">
+      <div class="robot-col">
+        <div class="robot-wrap">
+          <img src="404-robot-transparent.png" alt="Robô fofo segurando um cabo desconectado, com expressão confusa" width="1536" height="1024" />
+        </div>
       </div>
 
-      <span class="badge reveal">
-        <span class="dot"></span>
-        status: desconectado
-      </span>
+      <div class="text-col">
+        <span class="badge reveal">
+          <span class="dot"></span>
+          status: desconectado
+        </span>
 
-      <div class="code reveal">
-        <span class="kw">const</span> pagina <span class="kw">=</span> <span class="kw">await</span> <span class="fn">plug</span>.connect(<span class="str">location.pathname</span>)<br />
-        <span class="fn">// Error:</span> cabo desconectado — nada por aqui<span class="cursor">▌</span>
+        <div class="rule reveal"></div>
+
+        <h1 class="reveal">404</h1>
+
+        <p class="subtitle reveal">
+          Essa página caiu da tomada. O link pode estar quebrado ou ter sido movido —
+          <strong>vamos religar você</strong> na página inicial.
+        </p>
+
+        <div class="actions reveal">
+          <a class="btn primary" href="/">reconectar()</a>
+          <a class="btn secondary" href="/#contact">falar_comigo()</a>
+        </div>
       </div>
-
-      <h1 class="reveal">404</h1>
-
-      <p class="subtitle reveal">
-        Essa página caiu da tomada. O link pode estar quebrado ou ter sido movido —
-        <strong>vamos religar você</strong> na página inicial.
-      </p>
-
-      <div class="actions reveal">
-        <a class="btn primary" href="/">reconectar()</a>
-        <a class="btn secondary" href="/#contact">falar_comigo()</a>
-      </div>
-    </main>
+    </div>
   </body>
 </html>
