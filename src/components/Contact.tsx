@@ -99,20 +99,31 @@ export default function Contact() {
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
         >
+          <span className="inline-flex items-center gap-2 font-mono text-xs text-accent-mint border border-accent-mint/30 bg-accent-mint/5 rounded-full px-3 py-1 mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-mint animate-pulse" />
+            canal direto — cai no meu WhatsApp
+          </span>
+
           <CodeWindow filename="mensagem.tsx" language="form">
             <form onSubmit={handleSubmit} noValidate className="space-y-4">
               <div>
                 <label htmlFor="name" className="font-mono text-xs text-muted block mb-1.5">
-                  nome
+                  <span className="text-accent-blue">›</span> nome
                 </label>
-                <input
-                  id="name"
-                  type="text"
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  placeholder="Digite seu nome"
-                  className={inputClasses(!!errors.name)}
-                />
+                <div className="relative">
+                  <HiOutlineUser
+                    size={17}
+                    className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-faint"
+                  />
+                  <input
+                    id="name"
+                    type="text"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    placeholder="Digite seu nome"
+                    className={inputClasses(!!errors.name)}
+                  />
+                </div>
                 {errors.name && (
                   <p className="text-accent-rose text-xs font-mono mt-1">{errors.name}</p>
                 )}
@@ -120,33 +131,52 @@ export default function Contact() {
 
               <div>
                 <label htmlFor="email" className="font-mono text-xs text-muted block mb-1.5">
-                  e-mail <span className="text-faint">(opcional)</span>
+                  <span className="text-accent-blue">›</span> e-mail{' '}
+                  <span className="text-faint">(opcional)</span>
                 </label>
-                <input
-                  id="email"
-                  type="email"
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  placeholder="voce@email.com"
-                  className={inputClasses(!!errors.email)}
-                />
+                <div className="relative">
+                  <HiOutlineMail
+                    size={17}
+                    className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-faint"
+                  />
+                  <input
+                    id="email"
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    placeholder="voce@email.com"
+                    className={inputClasses(!!errors.email)}
+                  />
+                </div>
                 {errors.email && (
                   <p className="text-accent-rose text-xs font-mono mt-1">{errors.email}</p>
                 )}
               </div>
 
               <div>
-                <label htmlFor="message" className="font-mono text-xs text-muted block mb-1.5">
-                  mensagem
-                </label>
-                <textarea
-                  id="message"
-                  rows={4}
-                  value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  placeholder="Me conta um pouco sobre o projeto..."
-                  className={`${inputClasses(!!errors.message)} resize-none`}
-                />
+                <div className="flex items-baseline justify-between mb-1.5">
+                  <label htmlFor="message" className="font-mono text-xs text-muted">
+                    <span className="text-accent-blue">›</span> mensagem
+                  </label>
+                  <span className="font-mono text-[11px] text-faint">
+                    {form.message.length}/{MESSAGE_LIMIT}
+                  </span>
+                </div>
+                <div className="relative">
+                  <HiOutlineChatAlt2
+                    size={17}
+                    className="pointer-events-none absolute left-3.5 top-4 text-faint"
+                  />
+                  <textarea
+                    id="message"
+                    rows={4}
+                    maxLength={MESSAGE_LIMIT}
+                    value={form.message}
+                    onChange={(e) => setForm({ ...form, message: e.target.value })}
+                    placeholder="Me conta um pouco sobre o projeto..."
+                    className={`${inputClasses(!!errors.message)} resize-none`}
+                  />
+                </div>
                 {errors.message && (
                   <p className="text-accent-rose text-xs font-mono mt-1">{errors.message}</p>
                 )}
@@ -154,13 +184,57 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 font-mono text-sm px-5 py-3.5 rounded-md bg-accent-mint text-canvas font-semibold hover:brightness-110 transition"
+                disabled={status !== 'idle'}
+                className={`w-full inline-flex items-center justify-center gap-2 font-mono text-sm px-5 py-3.5 rounded-md font-semibold transition ${
+                  status === 'sent'
+                    ? 'bg-accent-mint text-canvas'
+                    : 'bg-accent-mint text-canvas hover:brightness-110 disabled:opacity-80'
+                }`}
               >
-                <HiOutlinePaperAirplane size={16} />
-                enviar_via_whatsapp()
+                <AnimatePresence mode="wait" initial={false}>
+                  {status === 'idle' && (
+                    <motion.span
+                      key="idle"
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.15 }}
+                      className="inline-flex items-center gap-2"
+                    >
+                      <HiOutlinePaperAirplane size={16} />
+                      enviar_via_whatsapp()
+                    </motion.span>
+                  )}
+                  {status === 'sending' && (
+                    <motion.span
+                      key="sending"
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.15 }}
+                      className="inline-flex items-center gap-2"
+                    >
+                      <span className="h-3.5 w-3.5 rounded-full border-2 border-canvas/40 border-t-canvas animate-spin" />
+                      conectando()
+                    </motion.span>
+                  )}
+                  {status === 'sent' && (
+                    <motion.span
+                      key="sent"
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.15 }}
+                      className="inline-flex items-center gap-2"
+                    >
+                      <HiOutlineCheckCircle size={16} />
+                      conectado()
+                    </motion.span>
+                  )}
+                </AnimatePresence>
               </button>
 
-              {sent && (
+              {status === 'sent' && (
                 <motion.p
                   initial={{ opacity: 0, y: -6 }}
                   animate={{ opacity: 1, y: 0 }}
