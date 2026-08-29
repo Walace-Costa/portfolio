@@ -195,7 +195,7 @@ export default function Contact() {
                       transition={{ duration: 0.15 }}
                       className="inline-flex items-center gap-2"
                     >
-                      <HiOutlinePaperAirplane size={16} />
+                      <FaWhatsapp size={17} />
                       enviar_via_whatsapp()
                     </motion.span>
                   )}
