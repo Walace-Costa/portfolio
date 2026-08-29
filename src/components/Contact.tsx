@@ -238,7 +238,7 @@ export default function Contact() {
                 </motion.p>
               )}
             </form>
-          </CodeWindow>
+          </div>
         </motion.div>
       </div>
     </section>
