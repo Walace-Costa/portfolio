@@ -1,13 +1,12 @@
 import { useState, type FormEvent } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  HiOutlinePaperAirplane,
   HiOutlineUser,
   HiOutlineMail,
   HiOutlineChatAlt2,
   HiOutlineCheckCircle,
 } from 'react-icons/hi'
-import CodeWindow from './CodeWindow'
+import { FaWhatsapp } from 'react-icons/fa'
 import SectionHeading from './SectionHeading'
 import SocialIcons from './SocialIcons'
 import { site } from '@/config/site'
