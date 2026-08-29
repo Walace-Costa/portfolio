@@ -1,6 +1,12 @@
 import { useState, type FormEvent } from 'react'
-import { motion } from 'framer-motion'
-import { HiOutlinePaperAirplane } from 'react-icons/hi'
+import { motion, AnimatePresence } from 'framer-motion'
+import {
+  HiOutlinePaperAirplane,
+  HiOutlineUser,
+  HiOutlineMail,
+  HiOutlineChatAlt2,
+  HiOutlineCheckCircle,
+} from 'react-icons/hi'
 import CodeWindow from './CodeWindow'
 import SectionHeading from './SectionHeading'
 import SocialIcons from './SocialIcons'
@@ -12,12 +18,15 @@ interface FormState {
   message: string
 }
 
+type SubmitStatus = 'idle' | 'sending' | 'sent'
+
 const initialState: FormState = { name: '', email: '', message: '' }
+const MESSAGE_LIMIT = 500
 
 export default function Contact() {
   const [form, setForm] = useState<FormState>(initialState)
   const [errors, setErrors] = useState<Partial<FormState>>({})
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState<SubmitStatus>('idle')
 
   const validate = (): boolean => {
     const nextErrors: Partial<FormState> = {}
@@ -31,7 +40,9 @@ export default function Contact() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    if (!validate()) return
+    if (!validate() || status !== 'idle') return
+
+    setStatus('sending')
 
     const lines = [
       `Olá! Me chamo ${form.name}.`,
@@ -43,15 +54,19 @@ export default function Contact() {
     const text = encodeURIComponent(lines.join('\n'))
     const url = `https://wa.me/${site.whatsappNumber}?text=${text}`
 
-    window.open(url, '_blank', 'noopener,noreferrer')
-    setSent(true)
-    setForm(initialState)
-    setTimeout(() => setSent(false), 4000)
+    setTimeout(() => {
+      window.open(url, '_blank', 'noopener,noreferrer')
+      setStatus('sent')
+      setForm(initialState)
+      setTimeout(() => setStatus('idle'), 3200)
+    }, 550)
   }
 
   const inputClasses = (hasError: boolean) =>
-    `w-full bg-panel2 border rounded-md px-4 py-3 font-mono text-sm text-ink placeholder:text-faint outline-none transition-colors ${
-      hasError ? 'border-accent-rose/60' : 'border-line focus:border-accent-blue/60'
+    `w-full bg-panel2 border rounded-md pl-11 pr-4 py-3 font-mono text-sm text-ink placeholder:text-faint outline-none transition-all focus:ring-2 ${
+      hasError
+        ? 'border-accent-rose/60 focus:ring-accent-rose/15'
+        : 'border-line focus:border-accent-blue/60 focus:ring-accent-blue/15'
     }`
 
   return (
