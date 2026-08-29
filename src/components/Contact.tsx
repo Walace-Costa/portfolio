@@ -98,12 +98,7 @@ export default function Contact() {
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
         >
-          <span className="inline-flex items-center gap-2 font-mono text-xs text-accent-mint border border-accent-mint/30 bg-accent-mint/5 rounded-full px-3 py-1 mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent-mint animate-pulse" />
-            canal direto: cai no meu WhatsApp
-          </span>
-
-          <CodeWindow filename="mensagem.tsx" language="form">
+          <div className="rounded-xl border border-line bg-panel/80 backdrop-blur-sm p-5 sm:p-6 shadow-2xl shadow-black/40">
             <form onSubmit={handleSubmit} noValidate className="space-y-4">
               <div>
                 <label htmlFor="name" className="font-mono text-xs text-muted block mb-1.5">
