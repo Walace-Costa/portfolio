@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem('portfolio-theme') === 'light') {
+            document.documentElement.classList.add('light');
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b0e14" />
+    <meta name="robots" content="noindex, follow" />
+    <title>404 — Página não encontrada | Walace Costa</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --color-canvas: 11 14 20;
+        --color-panel: 18 21 29;
+        --color-line: 35 40 56;
+        --color-ink: 230 232 238;
+        --color-muted: 131 140 160;
+        --color-accent-blue: 110 155 255;
+        --color-accent-mint: 110 231 183;
+      }
+
+      .light {
+        --color-canvas: 247 248 250;
+        --color-panel: 255 255 255;
+        --color-line: 221 227 238;
+        --color-ink: 15 20 32;
+        --color-muted: 91 100 120;
+        --color-accent-blue: 47 98 224;
+        --color-accent-mint: 22 150 105;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 24px;
+        font-family: 'Inter', system-ui, sans-serif;
+        color: rgb(var(--color-ink));
+        background-color: rgb(var(--color-canvas));
+        background-image: radial-gradient(
+          circle at 1px 1px,
+          rgb(var(--color-accent-blue) / 0.09) 1px,
+          transparent 0
+        );
+        background-size: 28px 28px;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 520px;
+        border: 1px solid rgb(var(--color-line));
+        background: rgb(var(--color-panel));
+        border-radius: 16px;
+        padding: 40px 32px;
+        text-align: center;
+        box-shadow: 0 24px 60px -30px rgb(0 0 0 / 0.5);
+      }
+
+      .terminal-bar {
+        display: flex;
+        gap: 6px;
+        justify-content: flex-start;
+        margin-bottom: 24px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: rgb(var(--color-line));
+      }
+
+      .code {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        color: rgb(var(--color-muted));
+        text-align: left;
+        margin-bottom: 20px;
+      }
+
+      .code .kw {
+        color: rgb(var(--color-accent-blue));
+      }
+
+      .code .str {
+        color: rgb(var(--color-accent-mint));
+      }
+
+      h1 {
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 800;
+        font-size: clamp(48px, 10vw, 80px);
+        line-height: 1;
+        margin: 0 0 12px;
+        background: linear-gradient(90deg, rgb(var(--color-accent-blue)), rgb(var(--color-accent-mint)));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      p.subtitle {
+        margin: 0 0 28px;
+        color: rgb(var(--color-muted));
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      .actions {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      a.btn {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        transition: transform 0.15s ease, opacity 0.15s ease;
+      }
+
+      a.btn:hover {
+        transform: translateY(-2px);
+      }
+
+      a.btn.primary {
+        background: rgb(var(--color-accent-blue));
+        color: rgb(var(--color-canvas));
+      }
+
+      a.btn.secondary {
+        border: 1px solid rgb(var(--color-line));
+        color: rgb(var(--color-ink));
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <div class="terminal-bar">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <div class="code">
+        <span class="kw">const</span> page = <span class="kw">await</span> fetch(<span class="str">location.pathname</span>)<br />
+        <span class="kw">throw</span> <span class="kw">new</span> Error(<span class="str">'Not Found'</span>)
+      </div>
+      <h1>404</h1>
+      <p class="subtitle">
+        Essa página não existe ou foi movida.<br />
+        Volte para a página inicial e continue navegando.
+      </p>
+      <div class="actions">
+        <a class="btn primary" href="/">Voltar ao início</a>
+        <a class="btn secondary" href="/#contact">Falar comigo</a>
+      </div>
+    </main>
+  </body>
+</html>
